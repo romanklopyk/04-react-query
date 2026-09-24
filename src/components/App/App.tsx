@@ -36,10 +36,10 @@ function App() {
     })
 
     React.useEffect((): void => {
-        if (data?.results.length === 0) {
+        if (isSuccess && data?.results.length === 0) {
             toast.error('No results found');
         }
-        }, [data])
+        }, [data, isSuccess])
 
     function onSelect(movie: Movie): void {
         setSelectedMovie(movie);
