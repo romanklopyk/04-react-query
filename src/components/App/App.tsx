@@ -2,7 +2,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import React from "react";
 import fetchMovies from '../../services/movieService';
 import MovieGrid from "../MovieGrid/MovieGrid.tsx";
-import type {Movie, MoviesResponse} from '../../types/movie';
+import type {Movie} from '../../types/movie';
 import Loader from "../Loader/Loader.tsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 import {keepPreviousData, useQuery} from "@tanstack/react-query";
@@ -10,6 +10,12 @@ import toast,{Toaster} from "react-hot-toast";
 import MovieModal from "../MovieModal/MovieModal.tsx";
 import Pagination from "../Pagination/Pagination.tsx";
 
+
+interface MoviesResponse {
+    results: Movie[];
+    total_pages: number;
+    total_results: number;
+}
 
 function App() {
 
