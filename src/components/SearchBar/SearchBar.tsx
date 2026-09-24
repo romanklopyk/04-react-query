@@ -9,6 +9,7 @@ function SearchBar({onSubmit}: SearchBarProps) {
 
     function handleForm(formData: FormData): void {
         const query = formData.get('query');
+
         if (typeof query === 'string' && query.trim()) {
             onSubmit(query.trim());
         } else {

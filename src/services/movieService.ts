@@ -1,9 +1,5 @@
 import axios from 'axios';
-import type {Movie} from '../types/movie';
-
-interface ResponseData {
-    results: Movie[];
-}
+import type {MoviesResponse} from '../types/movie';
 
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
@@ -15,18 +11,18 @@ const config =
         }
     }
 
-
-async function fetchMovies(query: string): Promise<Movie[]>  {
+async function fetchMovies(query: string, page: number): Promise<MoviesResponse> {
     try {
-        const response = await axios.get<ResponseData>('/search/movie', {
+        const response = await axios.get<MoviesResponse>('/search/movie', {
                 ...config,
                 params: {
-                    query
+                    query,
+                    page
                 }
             }
         );
-        console.log('response', response);
-        return response.data.results;
+        // console.log('response.data', response.data);
+        return response.data;
     } catch
         (error) {
         console.error('Error fetching movies:', error);
