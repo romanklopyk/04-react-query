@@ -65,7 +65,7 @@ function App() {
                 <Pagination
                     pageCount={data?.total_pages ?? 0}
                     forcePage={page}
-                    onPageChange={() => onPageChange(page)}/>
+                    onPageChange={onPageChange}/>
             )}
             {selectedMovie && <MovieModal movie={selectedMovie} onClose={onClose}/>}
         </>
