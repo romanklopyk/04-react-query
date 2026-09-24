@@ -4,7 +4,7 @@ import fetchMovies from '../../services/movieService';
 import MovieGrid from "../MovieGrid/MovieGrid.tsx";
 import type {Movie, MoviesResponse} from '../../types/movie';
 import Loader from "../Loader/Loader.tsx";
-import Error from "../ErrorMessage/ErrorMessage.tsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 import {keepPreviousData, useQuery} from "@tanstack/react-query";
 import toast,{Toaster} from "react-hot-toast";
 import MovieModal from "../MovieModal/MovieModal.tsx";
@@ -53,13 +53,13 @@ function App() {
             <Toaster/>
             <SearchBar onSubmit={handleSearch}/>
             {isLoading && <Loader/>}
-            {isError && <Error/>}
+            {isError && <ErrorMessage/>}
             {isSuccess && <MovieGrid movies={data.results} onSelect={onSelect}/>}
             {isSuccess && data.total_pages > 1 && (
                 <Pagination
-                    totalPages={data?.total_pages ?? 0}
-                    currentPage={page}
-                    onPageChange={onPageChange}/>
+                    pageCount={data?.total_pages ?? 0}
+                    forcePage={page}
+                    onPageChange={() => onPageChange(page)}/>
             )}
             {selectedMovie && <MovieModal movie={selectedMovie} onClose={onClose}/>}
         </>
